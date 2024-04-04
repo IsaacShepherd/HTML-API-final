@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+}
+
+.map {
+  width: 100vw;
+  height: 85dvh;
+  background-color: grey;
+}
