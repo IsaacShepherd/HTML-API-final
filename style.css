@@ -1,9 +1,92 @@
+:root {
+  --text: hsl(166, 35%, 90%);
+  --background: hsl(162, 33%, 6%);
+  --primary: hsl(160, 35%, 71%);
+  --secondary: hsl(245, 35%, 31%);
+  --accent: hsl(268, 34%, 50%);
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+}
+
 * {
   margin: 0;
 }
 
 .map {
-  width: 100vw;
-  height: 85dvh;
+  height: 65dvh;
   background-color: grey;
+}
+
+/* .container {
+  display: flex;
+  border: 3px solid red;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  border: 2px dotted green;
+} */
+
+body {
+  background: var(--background);
+  font-family: "Roboto", sans-serif;
+}
+
+.description {
+  margin-top: 1rem;
+  font-size: 2rem;
+  color: var(--text);
+  text-align: center;
+}
+
+.container {
+  margin-top: 2rem;
+  margin-left: 0;
+  list-style: none;
+  counter-reset: li;
+}
+.card {
+  padding: 10px 0;
+  position: relative;
+  /* left: 1.5em; */
+  margin-bottom: 0.75em;
+  padding-left: 1em;
+  background: var(--secondary);
+  font-weight: bold;
+  color: var(--text);
+  font-size: 1.5rem;
+}
+.card:before {
+  padding: 10px 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1.5em;
+  width: 1.875em;
+  text-align: center;
+  color: var(--secondary);
+  font-weight: bold;
+  background: var(--accent);
+  border-bottom-left-radius: 70em;
+  border-top-left-radius: 70em;
+  counter-increment: li;
+  content: counter(li);
+}
+
+#delete-all-marks-btn {
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  border-radius: 23px;
+  margin-left: 4rem;
+  background: var(--primary);
+  font-weight: bold;
+  color: var(--secondary);
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+#delete-all-marks-btn:hover {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--accent);
+  transform: translateY(-0.25em);
 }

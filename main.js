@@ -1,8 +1,4 @@
-const options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0,
-};
+import { mapsInit } from "./ymaps/mapsInit";
 
 function success(pos) {
   const crd = pos.coords;
@@ -11,46 +7,43 @@ function success(pos) {
   console.log(`Latitude : ${crd.latitude}`);
   console.log(`Longitude: ${crd.longitude}`);
 
-  ymaps.ready(function () {
-    let myMap = new ymaps.Map(
-        "map",
-        {
-          center: [crd.latitude, crd.longitude],
-          zoom: 17,
-        },
-        {
-          searchControlProvider: "yandex#search",
-        }
-      ),
-      // Создаём макет содержимого.
-      MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
-        '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
-      ),
-      myPlacemark = new ymaps.Placemark(
-        myMap.getCenter(),
-        {
-          hintContent: "Собственный значок метки",
-          balloonContent: "Это красивая метка",
-        },
-        {
-          // Опции.
-          // Необходимо указать данный тип макета.
-          iconLayout: "default#image",
-          // Своё изображение иконки метки.
-          iconImageHref: "./images/myIcon.png",
-          // Размеры метки.
-          iconImageSize: [42, 42],
-          // Смещение левого верхнего угла иконки относительно
-          // её "ножки" (точки привязки).
-          iconImageOffset: [0, 0],
-        }
-      );
-    myMap.geoObjects.add(myPlacemark);
-  });
+  mapsInit(crd.latitude, crd.longitude);
+  localStorage.setItem(
+    "userLastPos",
+    JSON.stringify(`${crd.latitude},${crd.longitude}`)
+  );
 }
 
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
+  const userLastPosStr = JSON.parse(localStorage.getItem("userLastPos"));
+  let userLastPos;
+  if (userLastPosStr) {
+    userLastPos = userLastPosStr.split(",");
+    console.log(userLastPos[0]);
+  }
+
+  if (err.code === 1) {
+    alert("Геолокация должна быть включена для отображения местоположения.");
+    if (userLastPos) {
+      mapsInit(userLastPos[0], userLastPos[1]);
+    } else {
+      mapsInit(59.934640620531255, 30.306098441650413);
+    }
+  }
 }
+
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+const deleteAllMarks = document.getElementById("delete-all-marks-btn");
+deleteAllMarks.addEventListener("click", (e) => {
+  localStorage.removeItem("userMarks");
+  localStorage.removeItem("locationText");
+  location.reload();
+});
 
 navigator.geolocation.getCurrentPosition(success, error, options);
