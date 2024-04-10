@@ -1,4 +1,4 @@
-import { mapsInit } from "./ymaps/mapsInit";
+import { mapsInit } from "./ymaps/mapsInit.js";
 
 function success(pos) {
   const crd = pos.coords;
