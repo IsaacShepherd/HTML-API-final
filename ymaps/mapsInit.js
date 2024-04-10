@@ -1,5 +1,5 @@
-import { saveToLS } from "../localstorage/LSHandler";
-import { drawFavPlaces } from "../utilities/drawFavPlaces";
+import { saveToLS } from "../localstorage/LSHandler.js";
+import { drawFavPlaces } from "../utilities/drawFavPlaces.js";
 
 export function mapsInit(lat, long) {
   let userMarks = localStorage.getItem("userMarks");
