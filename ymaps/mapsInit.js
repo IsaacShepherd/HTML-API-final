@@ -45,7 +45,7 @@ export function mapsInit(lat, long) {
           // Необходимо указать данный тип макета.
           iconLayout: "default#image",
           // Своё изображение иконки метки.
-          iconImageHref: "../images/myIcon.png",
+          iconImageHref: "./images/myIcon.png",
           // Размеры метки.
           iconImageSize: [60, 60],
           // Смещение левого верхнего угла иконки относительно
@@ -69,7 +69,7 @@ export function mapsInit(lat, long) {
               // Необходимо указать данный тип макета.
               iconLayout: "default#image",
               // Своё изображение иконки метки.
-              iconImageHref: "../images/myMark.png",
+              iconImageHref: "./images/myMark.png",
               // Размеры метки.
               iconImageSize: [42, 42],
               // Смещение левого верхнего угла иконки относительно
